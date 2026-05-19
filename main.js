@@ -3,8 +3,8 @@ const app=express()
 const Port=3000
 
 app.use((req,res,next)=>{
-    console.log("User logged in");
-    next()
+    console.log(`${req.method} request made to ${req.url}`);
+    next();
 })
 
 app.get("/orders",(req,res)=>{
