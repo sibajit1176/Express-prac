@@ -2,17 +2,25 @@ const express=require('express')
 const app=express()
 const Port=3000
 
-const addUser=(req,res,next)=>{
-    req.user='Guest'
+app.use((req,res,next)=>{
+    console.log("User logged in");
     next()
-}
+})
 
-
-app.get('/welcome',addUser,(req,res)=>{
-    res.send(`<h1>Welcome ,${req.user}</h1>`)
+app.get("/orders",(req,res)=>{
+    res.send("Here is the list of all orders.")
+})
+app.post("/orders",(req,res)=>{
+    res.send("A new order has been created.")
+})
+app.get("/users",(req,res)=>{
+    res.send("Here is the list of all users.")
+})
+app.post("/users",(req,res)=>{
+    res.send("A new user has been added.")
 })
 
 app.listen(Port,()=>{
- console.log(`app run on ${Port}`);
+ console.log(`Server is running on http://localhost:${Port}`);
  
 })
