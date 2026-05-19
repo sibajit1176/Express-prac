@@ -19,6 +19,11 @@ app.get("/users",(req,res)=>{
 app.post("/users",(req,res)=>{
     res.send("A new user has been added.")
 })
+app.get("/Wellcome/:userName",(req,res)=>{
+    const name=req.params.userName
+    const role=req.query.role
+    res.send(`Welcome ${name}, your role is ${role}`)
+})
 app.use((req,res)=>{
     res.status(404).send('<h1>404 - Page Not Found</h1>')
 })
