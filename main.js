@@ -1,29 +1,18 @@
 const express=require('express')
 const app=express()
+const userRouter=require('./routes/userRoutes')
+const orderRouter=require('./routes/orderRoutes')
+const dynamicRouter=require('./routes/dynamicRoutes')
 const Port=3000
 
 app.use((req,res,next)=>{
     console.log(`${req.method} request made to ${req.url}`);
     next();
 })
+app.use('/orders',orderRouter)
+app.use('/users',userRouter)
+app.use('/Wellcome',dynamicRouter)
 
-app.get("/orders",(req,res)=>{
-    res.send("Here is the list of all orders.")
-})
-app.post("/orders",(req,res)=>{
-    res.send("A new order has been created.")
-})
-app.get("/users",(req,res)=>{
-    res.send("Here is the list of all users.")
-})
-app.post("/users",(req,res)=>{
-    res.send("A new user has been added.")
-})
-app.get("/Wellcome/:userName",(req,res)=>{
-    const name=req.params.userName
-    const role=req.query.role
-    res.send(`Welcome ${name}, your role is ${role}`)
-})
 app.use((req,res)=>{
     res.status(404).send('<h1>404 - Page Not Found</h1>')
 })
